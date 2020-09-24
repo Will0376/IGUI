@@ -23,7 +23,10 @@ public class MButton extends Gui implements IButton {
 	public String buttonText;
 	private Runnable action = () -> {
 	};
+	public Minecraft mc = Minecraft.getMinecraft();
+	private Mouses click;
 	private boolean mouseButton1 = false;
+	private boolean mouseButton2 = false;
 
 	private MButton() {
 		//Use builer.
@@ -100,9 +103,16 @@ public class MButton extends Gui implements IButton {
 	@Override
 	public void mouseAction(int mouseX, int mouseY) {
 		if (mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY) && Mouse.isButtonDown(0) && !mouseButton1) {
-			action();
+			click(mc.getSoundHandler());
+			action(Mouses.RMB);
 		}
+		if (mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY) && Mouse.isButtonDown(1) && !mouseButton2) {
+			click(mc.getSoundHandler());
+			action(Mouses.LMB);
+		}
+
 		mouseButton1 = Mouse.isButtonDown(0);
+		mouseButton2 = Mouse.isButtonDown(1);
 	}
 
 	@Override
@@ -111,7 +121,8 @@ public class MButton extends Gui implements IButton {
 	}
 
 	@Override
-	public IButton action() {
+	public IButton action(Mouses click) {
+		this.click = click;
 		action.run();
 		return this;
 	}
@@ -121,7 +132,15 @@ public class MButton extends Gui implements IButton {
 		soundHandlerIn.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
 	}
 
+	public Mouses getClick() {
+		return click;
+	}
+
 	public void setAction(Runnable action) {
 		this.action = action;
+	}
+
+	public boolean isRight() {
+		return click == Mouses.RMB;
 	}
 }

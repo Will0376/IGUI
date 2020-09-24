@@ -16,11 +16,12 @@ public interface IButton {
 
 	boolean mouseInArea(Minecraft mc, int mouseX, int mouseY);
 
-	IButton action();
+	IButton action(Mouses click);
 
 	void click(SoundHandler soundHandlerIn);
 
 	default Stream<? extends IButton> getStream() {
 		return Stream.of(this);
 	}
+
 }

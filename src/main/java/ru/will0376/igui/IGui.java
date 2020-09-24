@@ -11,7 +11,7 @@ public class IGui {
 
 	public static final String MOD_ID = "igui";
 	public static final String MOD_NAME = "IGui";
-	public static final String VERSION = "1.0";
+	public static final String VERSION = "0.0.1A";
 
 	@Mod.Instance(MOD_ID)
 	public static IGui INSTANCE;
