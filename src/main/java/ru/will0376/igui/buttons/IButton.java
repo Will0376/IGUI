@@ -2,6 +2,7 @@ package ru.will0376.igui.buttons;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
+import ru.will0376.igui.utils.Mouses;
 
 import java.util.stream.Stream;
 
@@ -18,10 +19,15 @@ public interface IButton {
 
 	IButton action(Mouses click);
 
+	void setAction(Runnable action);
+
 	void click(SoundHandler soundHandlerIn);
 
 	default Stream<? extends IButton> getStream() {
 		return Stream.of(this);
 	}
 
+	Mouses getClick();
+
+	boolean isRight();
 }

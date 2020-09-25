@@ -1,4 +1,4 @@
-package ru.will0376.igui.buttons;
+package ru.will0376.igui.utils;
 
 public enum Mouses {
 	RMB, LMB, None;

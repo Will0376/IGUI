@@ -1,7 +1,8 @@
 package ru.will0376.igui;
 
-import ru.will0376.igui.buttons.GuiWrapper;
 import ru.will0376.igui.buttons.MButton;
+import ru.will0376.igui.buttons.MCheckBox;
+import ru.will0376.igui.utils.GuiWrapper;
 
 
 public class TestGui extends GuiWrapper {
@@ -16,11 +17,9 @@ public class TestGui extends GuiWrapper {
 				else button.buttonText = String.valueOf(buttonText - 1);
 			});
 		});
-		add(MButton.builder(10, 30, "10")).getStream().forEach(e -> {
-			((MButton) e).setAction(() -> {
-				int buttonText = Integer.parseInt(((MButton) e).buttonText);
-				((MButton) e).buttonText = String.valueOf(buttonText + 12);
-			});
+		add(MCheckBox.builder(10, 34, "O")).addOffsetTextY(1).addOffsetTextX(0).setScaledTextX(3.1f).setScaledTextY(3).getStream().forEach(e -> {
+			MCheckBox box = (MCheckBox) e;
+			box.setAction(box::toggleIsChecked);
 		});
 	}
 

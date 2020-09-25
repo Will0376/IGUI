@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
+import ru.will0376.igui.utils.Mouses;
 
 public class MButton extends Gui implements IButton {
 	public static int BUTTON = 0;
@@ -21,9 +22,9 @@ public class MButton extends Gui implements IButton {
 	public boolean enabled;
 	public boolean visible;
 	public String buttonText;
+	public Minecraft mc = Minecraft.getMinecraft();
 	private Runnable action = () -> {
 	};
-	public Minecraft mc = Minecraft.getMinecraft();
 	private Mouses click;
 	private boolean mouseButton1 = false;
 	private boolean mouseButton2 = false;
@@ -132,15 +133,22 @@ public class MButton extends Gui implements IButton {
 		soundHandlerIn.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
 	}
 
+	@Override
 	public Mouses getClick() {
 		return click;
 	}
 
+	@Override
 	public void setAction(Runnable action) {
 		this.action = action;
 	}
 
+	@Override
 	public boolean isRight() {
 		return click == Mouses.RMB;
+	}
+
+	public MButton get() {
+		return this;
 	}
 }

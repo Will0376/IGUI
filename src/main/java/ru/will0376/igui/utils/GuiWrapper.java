@@ -1,6 +1,7 @@
-package ru.will0376.igui.buttons;
+package ru.will0376.igui.utils;
 
 import net.minecraft.client.gui.GuiScreen;
+import ru.will0376.igui.buttons.IButton;
 
 import java.util.ArrayList;
 
@@ -20,8 +21,8 @@ public class GuiWrapper extends GuiScreen {
 		});
 	}
 
-	public IButton add(IButton button) {
-		buttons.add(button);
-		return button;
+	public <T extends IButton> T add(T buttonIn) {
+		buttons.add(buttonIn);
+		return buttonIn;
 	}
 }
