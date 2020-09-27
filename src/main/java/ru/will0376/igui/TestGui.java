@@ -32,8 +32,9 @@ public class TestGui extends GuiWrapper {
 				if (sl.isRight()) sl.setDefault();
 			});
 		});
-		super.initGui();
 
+		super.initGui();
+		if (!this.buttons.isEmpty()) setSelected(0);
 	}
 
 	@Override

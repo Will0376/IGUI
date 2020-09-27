@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class GuiWrapper extends GuiScreen {
-	ArrayList<IButton> buttons = new ArrayList<>();
+	public ArrayList<IButton> buttons = new ArrayList<>();
 	boolean rightClick = false;
 
 	@Override
@@ -21,7 +21,6 @@ public class GuiWrapper extends GuiScreen {
 
 	@Override
 	public void initGui() {
-		if (!buttons.isEmpty()) buttons.get(0).setSelected(true);
 		super.initGui();
 	}
 
@@ -63,5 +62,13 @@ public class GuiWrapper extends GuiScreen {
 	public <T extends IButton> T add(T buttonIn) {
 		buttons.add(buttonIn);
 		return buttonIn;
+	}
+
+	public void setSelected(int index) {
+		try {
+			buttons.get(index).setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
