@@ -110,7 +110,8 @@ public class MCheckBox extends Gui implements IButton {
 				GlStateManager.enableBlend();
 				GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-				this.drawTexturedModalRect(this.x, this.y, 0, 46, this.width / 2, this.height);
+				GuiHelper.cleanRender(x, y, width, height, 1);
+				//this.drawTexturedModalRect(this.x, this.y, 0, 46, this.width / 2, this.height);
 			}
 		}
 	}
@@ -118,10 +119,10 @@ public class MCheckBox extends Gui implements IButton {
 	@Override
 	public void mouseAction(int mouseX, int mouseY) {
 		if (mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY) && Mouse.isButtonDown(0) && !mouseButton1) {
-			action(Mouses.RMB);
+			action(Mouses.LMB);
 		}
 		if (mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY) && Mouse.isButtonDown(1) && !mouseButton2) {
-			action(Mouses.LMB);
+			action(Mouses.RMB);
 		}
 
 		mouseButton1 = Mouse.isButtonDown(0);

@@ -107,13 +107,10 @@ public class MButton extends Gui implements IButton {
 	@Override
 	public void mouseAction(int mouseX, int mouseY) {
 		boolean mouseInArea = mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY);
-		if (mouseInArea && Mouse.isButtonDown(0) && !mouseButton1) {
-			action(Mouses.RMB);
-		}
+		if (mouseInArea && Mouse.isButtonDown(0) && !mouseButton1) action(Mouses.LMB);
 
-		if (mouseInArea && Mouse.isButtonDown(1) && !mouseButton2) {
-			action(Mouses.LMB);
-		}
+		if (mouseInArea && Mouse.isButtonDown(1) && !mouseButton2) action(Mouses.RMB);
+
 		mouseButton1 = Mouse.isButtonDown(0);
 		mouseButton2 = Mouse.isButtonDown(1);
 	}
@@ -168,8 +165,14 @@ public class MButton extends Gui implements IButton {
 				case Keyboard.KEY_NUMPADENTER:
 				case Keyboard.KEY_RETURN:
 				case Keyboard.KEY_SPACE:
-					if (GuiScreen.isShiftKeyDown()) action(Mouses.LMB);
-					else action(Mouses.RMB);
+					if (GuiScreen.isShiftKeyDown()) action(Mouses.RMB);
+					else action(Mouses.LMB);
+					break;
+				case Keyboard.KEY_UP:
+					action(Mouses.LMB);
+					break;
+				case Keyboard.KEY_DOWN:
+					action(Mouses.RMB);
 					break;
 			}
 		}

@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import ru.will0376.igui.utils.GuiHelper;
 import ru.will0376.igui.utils.Mouses;
 
 public class MSlider extends Gui implements IButton {
@@ -25,6 +26,8 @@ public class MSlider extends Gui implements IButton {
 	public String name;
 	public String defName;
 	Minecraft minecraft = Minecraft.getMinecraft();
+	private ResourceLocation bg;
+	private ResourceLocation button;
 	private boolean mouseButton2 = false;
 	private Runnable action = () -> {
 	};
@@ -35,7 +38,23 @@ public class MSlider extends Gui implements IButton {
 
 	}
 
-	public static MSlider builder0(int x, int y, int width, int height, float minIn, float maxIn, float defaultValue, String name) {
+	public static MSlider builder(int x, int y, float defaultValue) {
+		return builder0(x, y, 200, 20, 0, 1, defaultValue, null, null, String.valueOf(defaultValue));
+	}
+
+	public static MSlider builder(int x, int y, int width, int height, float defaultValue) {
+		return builder0(x, y, width, height, 0, 1, defaultValue, null, null, String.valueOf(defaultValue));
+	}
+
+	public static MSlider builder(int x, int y, int width, int height, float defaultValue, String name) {
+		return builder0(x, y, width, height, 0, 1, defaultValue, null, null, name);
+	}
+
+	public static MSlider builder(int x, int y, int width, int height, float defaultValue, ResourceLocation bg, ResourceLocation button, String name) {
+		return builder0(x, y, width, height, 0, 1, defaultValue, bg, button, name);
+	}
+
+	public static MSlider builder0(int x, int y, int width, int height, float minIn, float maxIn, float defaultValue, ResourceLocation bg, ResourceLocation button, String name) {
 		MSlider slider = new MSlider();
 		slider.sliderPosition = (defaultValue - minIn) / (maxIn - minIn);
 		slider.defaultValue = defaultValue;
@@ -46,6 +65,8 @@ public class MSlider extends Gui implements IButton {
 		slider.min = minIn;
 		slider.max = maxIn;
 		slider.name = name;
+		slider.bg = bg;
+		slider.button = button;
 		slider.defName = name;
 		return slider;
 	}
@@ -63,16 +84,28 @@ public class MSlider extends Gui implements IButton {
 
 	@Override
 	public void draw(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-		mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
+		if (bg == null) mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
+		else mc.getTextureManager().bindTexture(bg);
+
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.enableBlend();
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		this.drawTexturedModalRect(this.x, this.y, 0, 46, this.width / 2, this.height);
-		this.drawTexturedModalRect(this.x + this.width / 2, this.y, 200 - this.width / 2, 46, this.width / 2, this.height);
-		this.drawTexturedModalRect(this.x + (int) (this.sliderPosition * (float) (this.width - 8)), this.y, 0, 66, 4, height);
-		this.drawTexturedModalRect(this.x + (int) (this.sliderPosition * (float) (this.width - 8)) + 4, this.y, 196, 66, 4, height);
-
+		if (bg == null) {
+			this.drawTexturedModalRect(this.x, this.y, 0, 46, this.width / 2, this.height);
+			this.drawTexturedModalRect(this.x + this.width / 2, this.y, 200 - this.width / 2, 46, this.width / 2, this.height);
+		} else {
+			GuiHelper.cleanRender(x, y, width, height, 1);
+		}
+		if (button == null) {
+			if (isSelected) {
+				this.drawTexturedModalRect(this.x + (int) (this.sliderPosition * (float) (this.width - 8)), this.y, 0, 86, 4, this.height);
+				this.drawTexturedModalRect(this.x + (int) (this.sliderPosition * (float) (this.width - 8)) + 4, this.y, 196, 86, 4, this.height);
+			} else {
+				this.drawTexturedModalRect(this.x + (int) (this.sliderPosition * (float) (this.width - 8)), this.y, 0, 66, 4, this.height);
+				this.drawTexturedModalRect(this.x + (int) (this.sliderPosition * (float) (this.width - 8)) + 4, this.y, 196, 66, 4, this.height);
+			}
+		}
 		FontRenderer fontrenderer = mc.fontRenderer;
 		this.drawCenteredString(fontrenderer, this.name, this.x + this.width / 2, this.y + (this.height - 8) / 2, 14737632);
 	}

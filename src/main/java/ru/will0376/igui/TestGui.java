@@ -5,6 +5,8 @@ import ru.will0376.igui.buttons.MCheckBox;
 import ru.will0376.igui.buttons.MSlider;
 import ru.will0376.igui.utils.GuiWrapper;
 
+import java.text.DecimalFormat;
+
 
 public class TestGui extends GuiWrapper {
 	@Override
@@ -13,8 +15,8 @@ public class TestGui extends GuiWrapper {
 			MButton button = (MButton) e;
 			button.setAction(() -> {
 				int buttonText = Integer.parseInt(button.buttonText);
-				if (button.isRight()) button.buttonText = String.valueOf(buttonText + 1);
-				else button.buttonText = String.valueOf(buttonText - 1);
+				if (button.isRight()) button.buttonText = String.valueOf(buttonText - 1);
+				else button.buttonText = String.valueOf(buttonText + 1);
 			});
 		});
 
@@ -22,10 +24,11 @@ public class TestGui extends GuiWrapper {
 			MCheckBox box = (MCheckBox) e;
 			box.setAction(box::toggleIsChecked);
 		});
-		add(MSlider.builder0(50, 50, 50, 11, 0, 1, 0.5f, "test")).stream().forEach(e -> {
+
+		add(MSlider.builder(50, 50, 0.5f)).stream().forEach(e -> {
 			MSlider sl = (MSlider) e;
 			sl.setAction(() -> {
-				sl.name = "" + (int) (sl.sliderPosition * 100);
+				sl.name = new DecimalFormat("##.##").format(sl.sliderPosition);
 				if (sl.isRight()) sl.setDefault();
 			});
 		});

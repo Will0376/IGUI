@@ -32,7 +32,6 @@ public class GuiWrapper extends GuiScreen {
 			try {
 				if (e.isSelected()) {
 					int i = buttons.indexOf(e);
-					System.out.println("now: " + i);
 					switch (keyCode) {
 						case Keyboard.KEY_LEFT:
 							if (e.canMove()) {
