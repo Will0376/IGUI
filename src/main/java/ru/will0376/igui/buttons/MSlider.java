@@ -26,51 +26,44 @@ public class MSlider extends Gui implements IButton {
 	public String name;
 	public String defName;
 	Minecraft minecraft = Minecraft.getMinecraft();
-	private ResourceLocation bg;
-	private ResourceLocation button;
+	private final ResourceLocation bg;
+	private final ResourceLocation button;
 	private boolean mouseButton2 = false;
 	private Runnable action = () -> {
 	};
 	private Mouses click;
 	private boolean isSelected = false;
 
-	private MSlider() {
-
+	public MSlider(int x, int y, int width, int height, float minIn, float maxIn, float defaultValue, ResourceLocation bg, ResourceLocation button, String name) {
+		this.sliderPosition = (defaultValue - minIn) / (maxIn - minIn);
+		this.defaultValue = defaultValue;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.min = minIn;
+		this.max = maxIn;
+		this.name = name;
+		this.bg = bg;
+		this.button = button;
+		this.defName = name;
 	}
 
 	public static MSlider builder(int x, int y, float defaultValue) {
-		return builder0(x, y, 200, 20, 0, 1, defaultValue, null, null, String.valueOf(defaultValue));
+		return new MSlider(x, y, 200, 20, 0, 1, defaultValue, null, null, String.valueOf(defaultValue));
 	}
 
 	public static MSlider builder(int x, int y, int width, int height, float defaultValue) {
-		return builder0(x, y, width, height, 0, 1, defaultValue, null, null, String.valueOf(defaultValue));
+		return new MSlider(x, y, width, height, 0, 1, defaultValue, null, null, String.valueOf(defaultValue));
 	}
 
 	public static MSlider builder(int x, int y, int width, int height, float defaultValue, String name) {
-		return builder0(x, y, width, height, 0, 1, defaultValue, null, null, name);
+		return new MSlider(x, y, width, height, 0, 1, defaultValue, null, null, name);
 	}
 
 	public static MSlider builder(int x, int y, int width, int height, float defaultValue, ResourceLocation bg, ResourceLocation button, String name) {
-		return builder0(x, y, width, height, 0, 1, defaultValue, bg, button, name);
+		return new MSlider(x, y, width, height, 0, 1, defaultValue, bg, button, name);
 	}
-
-	public static MSlider builder0(int x, int y, int width, int height, float minIn, float maxIn, float defaultValue, ResourceLocation bg, ResourceLocation button, String name) {
-		MSlider slider = new MSlider();
-		slider.sliderPosition = (defaultValue - minIn) / (maxIn - minIn);
-		slider.defaultValue = defaultValue;
-		slider.x = x;
-		slider.y = y;
-		slider.width = width;
-		slider.height = height;
-		slider.min = minIn;
-		slider.max = maxIn;
-		slider.name = name;
-		slider.bg = bg;
-		slider.button = button;
-		slider.defName = name;
-		return slider;
-	}
-
 	@Override
 	public int getStaticId() {
 		return SLIDER;

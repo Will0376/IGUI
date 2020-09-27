@@ -32,34 +32,28 @@ public class MButton extends Gui implements IButton {
 	private boolean mouseButton2 = false;
 	private boolean isSelected = false;
 
-	private MButton() {
-		//Use builer.
+	public MButton(int x, int y, int width, int height, String buttonText, ResourceLocation firstTexture, ResourceLocation secondTexture) {
+		this.width = width;
+		this.height = height;
+		this.enabled = true;
+		this.x = x;
+		this.y = y;
+		this.buttonText = buttonText;
+		this.firstTexture = firstTexture;
+		this.secondTexture = secondTexture;
+		this.visible = true;
 	}
 
 	public static MButton builder(int x, int y, String buttonText) {
-		return builder(x, y, 200, 20, buttonText, BUTTON_DEFAULT_TEXTURES, null);
+		return new MButton(x, y, 200, 20, buttonText, BUTTON_DEFAULT_TEXTURES, null);
 	}
 
 	public static MButton builder(int x, int y, String buttonText, ResourceLocation firstTexture) {
-		return builder(x, y, 200, 20, buttonText, firstTexture, null);
+		return new MButton(x, y, 200, 20, buttonText, firstTexture, null);
 	}
 
 	public static MButton builder(int x, int y, String buttonText, ResourceLocation firstTexture, ResourceLocation secondTexture) {
-		return builder(x, y, 200, 20, buttonText, firstTexture, secondTexture);
-	}
-
-	public static MButton builder(int x, int y, int width, int height, String buttonText, ResourceLocation firstTexture, ResourceLocation secondTexture) {
-		MButton mb = new MButton();
-		mb.width = width;
-		mb.height = height;
-		mb.enabled = true;
-		mb.x = x;
-		mb.y = y;
-		mb.buttonText = buttonText;
-		mb.firstTexture = firstTexture;
-		mb.secondTexture = secondTexture;
-		mb.visible = true;
-		return mb;
+		return new MButton(x, y, 200, 20, buttonText, firstTexture, secondTexture);
 	}
 
 	@Override

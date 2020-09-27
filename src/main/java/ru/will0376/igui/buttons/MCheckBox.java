@@ -38,46 +38,41 @@ public class MCheckBox extends Gui implements IButton {
 	};
 	private boolean isSelected = false;
 
-	private MCheckBox() {
+	public MCheckBox(int x, int y, int width, int height, boolean isChecked, ResourceLocation firstTexture, ResourceLocation secondTexture, String name) {
+		this.isChecked = isChecked;
+		this.height = height;
+		this.width = width;
+		this.x = x;
+		this.y = y;
+		this.firstTexture = firstTexture;
+		this.secondTexture = secondTexture;
+		this.enabled = true;
+		this.visible = true;
+		this.buttonString = name;
 	}
 
 	public static MCheckBox builder(int x, int y) {
-		return builder0(x, y, 20, 20, false, null, null, "x");
+		return new MCheckBox(x, y, 20, 20, false, null, null, "x");
 	}
 
 	public static MCheckBox builder(int x, int y, boolean isChecked) {
-		return builder0(x, y, 20, 20, isChecked, null, null, "x");
+		return new MCheckBox(x, y, 20, 20, isChecked, null, null, "x");
 	}
 
 	public static MCheckBox builder(int x, int y, String name) {
-		return builder0(x, y, 20, 20, false, null, null, name);
+		return new MCheckBox(x, y, 20, 20, false, null, null, name);
 	}
 
 	public static MCheckBox builder(int x, int y, boolean isChecked, String name) {
-		return builder0(x, y, 20, 20, isChecked, null, null, name);
+		return new MCheckBox(x, y, 20, 20, isChecked, null, null, name);
 	}
 
 	public static MCheckBox builder(int x, int y, boolean isChecked, ResourceLocation firstTexture, String name) {
-		return builder0(x, y, 20, 20, isChecked, firstTexture, null, name);
+		return new MCheckBox(x, y, 20, 20, isChecked, firstTexture, null, name);
 	}
 
 	public static MCheckBox builder(int x, int y, boolean isChecked, ResourceLocation firstTexture, ResourceLocation secondTexture, String name) {
-		return builder0(x, y, 20, 20, isChecked, firstTexture, secondTexture, name);
-	}
-
-	public static MCheckBox builder0(int x, int y, int width, int height, boolean isChecked, ResourceLocation firstTexture, ResourceLocation secondTexture, String name) {
-		MCheckBox box = new MCheckBox();
-		box.isChecked = isChecked;
-		box.height = height;
-		box.width = width;
-		box.x = x;
-		box.y = y;
-		box.firstTexture = firstTexture;
-		box.secondTexture = secondTexture;
-		box.enabled = true;
-		box.visible = true;
-		box.buttonString = name;
-		return box;
+		return new MCheckBox(x, y, 20, 20, isChecked, firstTexture, secondTexture, name);
 	}
 
 	@Override
