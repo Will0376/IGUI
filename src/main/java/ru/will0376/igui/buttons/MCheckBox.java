@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import ru.will0376.igui.utils.GuiHelper;
 import ru.will0376.igui.utils.Mouses;
@@ -35,6 +36,7 @@ public class MCheckBox extends Gui implements IButton {
 	private boolean mouseButton2 = false;
 	private Runnable action = () -> {
 	};
+	private boolean isSelected = false;
 
 	private MCheckBox() {
 	}
@@ -97,6 +99,9 @@ public class MCheckBox extends Gui implements IButton {
 				if (this.isChecked) {
 					GuiHelper.drawScalledString(mc.fontRenderer, this.x + 5 + offsetTextX, this.y - (height / 2) + 5 + offsetTextY, scaledTextX, scaledTextY, 1, buttonString, -1);
 				}
+				if (this.isSelected)
+					GuiHelper.drawScalledString(mc.fontRenderer, this.x + 22 + offsetTextX, this.y - (height / 2) + 4 + offsetTextY, scaledTextX, scaledTextY, 1, "<", -1);
+
 			} else {
 				if (!isChecked) Minecraft.getMinecraft().getTextureManager().bindTexture(firstTexture);
 				else Minecraft.getMinecraft().getTextureManager().bindTexture(secondTexture);
@@ -113,11 +118,9 @@ public class MCheckBox extends Gui implements IButton {
 	@Override
 	public void mouseAction(int mouseX, int mouseY) {
 		if (mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY) && Mouse.isButtonDown(0) && !mouseButton1) {
-			click(mc.getSoundHandler());
 			action(Mouses.RMB);
 		}
 		if (mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY) && Mouse.isButtonDown(1) && !mouseButton2) {
-			click(mc.getSoundHandler());
 			action(Mouses.LMB);
 		}
 
@@ -132,6 +135,7 @@ public class MCheckBox extends Gui implements IButton {
 
 	@Override
 	public IButton action(Mouses click) {
+		click(mc.getSoundHandler());
 		this.click = click;
 		action.run();
 		return this;
@@ -159,6 +163,34 @@ public class MCheckBox extends Gui implements IButton {
 	@Override
 	public boolean isRight() {
 		return click == Mouses.RMB;
+	}
+
+	@Override
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	@Override
+	public void setSelected(boolean in) {
+		isSelected = in;
+	}
+
+	@Override
+	public void keyInput(char typedChar, int keyCode) {
+		if (isSelected) {
+			switch (keyCode) {
+				case Keyboard.KEY_NUMPADENTER:
+				case Keyboard.KEY_RETURN:
+				case Keyboard.KEY_SPACE:
+					action(Mouses.RMB);
+					break;
+			}
+		}
+	}
+
+	@Override
+	public boolean canMove() {
+		return true;
 	}
 
 	public boolean isChecked() {

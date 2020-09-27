@@ -23,11 +23,19 @@ public interface IButton {
 
 	void click(SoundHandler soundHandlerIn);
 
-	default Stream<? extends IButton> getStream() {
+	default Stream<? extends IButton> stream() {
 		return Stream.of(this);
 	}
 
 	Mouses getClick();
 
 	boolean isRight();
+
+	boolean isSelected();
+
+	void setSelected(boolean in);
+
+	void keyInput(char typedChar, int keyCode);
+
+	boolean canMove();
 }

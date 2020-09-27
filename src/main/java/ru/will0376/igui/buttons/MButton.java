@@ -4,9 +4,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import ru.will0376.igui.utils.Mouses;
 
@@ -28,6 +30,7 @@ public class MButton extends Gui implements IButton {
 	private Mouses click;
 	private boolean mouseButton1 = false;
 	private boolean mouseButton2 = false;
+	private boolean isSelected = false;
 
 	private MButton() {
 		//Use builer.
@@ -74,7 +77,7 @@ public class MButton extends Gui implements IButton {
 	public void draw(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
 			int j = this.enabled ? 14737632 : 10526880;
-			boolean mouseOver = mouseInArea(mc, mouseX, mouseY);
+			boolean mouseOver = mouseInArea(mc, mouseX, mouseY) || isSelected;
 
 			if (mouseOver && secondTexture != null) mc.getTextureManager().bindTexture(secondTexture);
 			else mc.getTextureManager().bindTexture(firstTexture);
@@ -103,15 +106,14 @@ public class MButton extends Gui implements IButton {
 
 	@Override
 	public void mouseAction(int mouseX, int mouseY) {
-		if (mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY) && Mouse.isButtonDown(0) && !mouseButton1) {
-			click(mc.getSoundHandler());
+		boolean mouseInArea = mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY);
+		if (mouseInArea && Mouse.isButtonDown(0) && !mouseButton1) {
 			action(Mouses.RMB);
 		}
-		if (mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY) && Mouse.isButtonDown(1) && !mouseButton2) {
-			click(mc.getSoundHandler());
+
+		if (mouseInArea && Mouse.isButtonDown(1) && !mouseButton2) {
 			action(Mouses.LMB);
 		}
-
 		mouseButton1 = Mouse.isButtonDown(0);
 		mouseButton2 = Mouse.isButtonDown(1);
 	}
@@ -123,6 +125,7 @@ public class MButton extends Gui implements IButton {
 
 	@Override
 	public IButton action(Mouses click) {
+		click(mc.getSoundHandler());
 		this.click = click;
 		action.run();
 		return this;
@@ -146,6 +149,35 @@ public class MButton extends Gui implements IButton {
 	@Override
 	public boolean isRight() {
 		return click == Mouses.RMB;
+	}
+
+	@Override
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	@Override
+	public void setSelected(boolean in) {
+		isSelected = in;
+	}
+
+	@Override
+	public void keyInput(char typedChar, int keyCode) {
+		if (isSelected) {
+			switch (keyCode) {
+				case Keyboard.KEY_NUMPADENTER:
+				case Keyboard.KEY_RETURN:
+				case Keyboard.KEY_SPACE:
+					if (GuiScreen.isShiftKeyDown()) action(Mouses.LMB);
+					else action(Mouses.RMB);
+					break;
+			}
+		}
+	}
+
+	@Override
+	public boolean canMove() {
+		return true;
 	}
 
 	public MButton get() {
