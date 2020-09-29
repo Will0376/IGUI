@@ -3,6 +3,7 @@ package ru.will0376.igui.utils;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
 import ru.will0376.igui.buttons.IButton;
+import ru.will0376.igui.buttons.MTextField;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +17,17 @@ public class GuiWrapper extends GuiScreen {
 		buttons.forEach(e -> {
 			e.draw(mc, mouseX, mouseY, partialTicks);
 			e.mouseAction(mouseX, mouseY);
+			if (e.getStaticId() == MTextField.TextField) {
+				if (((MTextField) e).getResponse().getAndToggle()) {
+					deSelectAllButtons();
+					e.setSelected(true);
+				}
+			}
 		});
+	}
+
+	public void deSelectAllButtons() {
+		buttons.forEach(e -> e.setSelected(false));
 	}
 
 	@Override
@@ -33,7 +44,7 @@ public class GuiWrapper extends GuiScreen {
 					int i = buttons.indexOf(e);
 					switch (keyCode) {
 						case Keyboard.KEY_LEFT:
-							if (e.canMove()) {
+							if (e.canMove(keyCode)) {
 								if (i - 1 >= 0) {
 									e.setSelected(false);
 									buttons.get(i - 1).setSelected(true);
@@ -41,7 +52,7 @@ public class GuiWrapper extends GuiScreen {
 							}
 							break;
 						case Keyboard.KEY_RIGHT:
-							if (e.canMove() && !rightClick) {
+							if (e.canMove(keyCode) && !rightClick) {
 								if (i + 1 < buttons.size()) {
 									e.setSelected(false);
 									buttons.get(i + 1).setSelected(true);

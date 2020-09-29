@@ -37,5 +37,5 @@ public interface IButton {
 
 	void keyInput(char typedChar, int keyCode);
 
-	boolean canMove();
+	boolean canMove(int keyCode);
 }

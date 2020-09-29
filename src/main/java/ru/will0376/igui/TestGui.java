@@ -1,8 +1,6 @@
 package ru.will0376.igui;
 
-import ru.will0376.igui.buttons.MButton;
-import ru.will0376.igui.buttons.MCheckBox;
-import ru.will0376.igui.buttons.MSlider;
+import ru.will0376.igui.buttons.*;
 import ru.will0376.igui.utils.GuiWrapper;
 
 import java.text.DecimalFormat;
@@ -33,6 +31,8 @@ public class TestGui extends GuiWrapper {
 			});
 		});
 
+		add(new MTextField(50, 80, 100, 30, "test", new GuiResponse()));
+		add(new MTextField(50, 130, 100, 30, "test2", new GuiResponse()));
 		super.initGui();
 		if (!this.buttons.isEmpty()) setSelected(0);
 	}

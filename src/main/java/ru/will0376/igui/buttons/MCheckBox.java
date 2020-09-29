@@ -185,7 +185,7 @@ public class MCheckBox extends Gui implements IButton {
 	}
 
 	@Override
-	public boolean canMove() {
+	public boolean canMove(int keyCode) {
 		return true;
 	}
 
