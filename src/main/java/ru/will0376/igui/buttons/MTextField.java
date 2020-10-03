@@ -16,7 +16,10 @@ import org.lwjgl.input.Mouse;
 import ru.will0376.igui.utils.Mouses;
 
 import java.util.function.Predicate;
-
+/**
+ * @deprecated Не готов.
+ */
+@Deprecated
 public class MTextField extends Gui implements IButton {
 	public static int TextField = 3;
 	private final Predicate<String> validator = s -> true;

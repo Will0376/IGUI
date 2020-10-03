@@ -8,9 +8,19 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class GuiHelper {
+
+	public static void bindTexture(String modId, String path) {
+		bindTexture(new ResourceLocation(modId + ":" + path));
+	}
+
+	public static void bindTexture(ResourceLocation location) {
+		Minecraft.getMinecraft().renderEngine.bindTexture(location);
+	}
+
 	public static void drawTextured(int x, int y) {
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -92,5 +102,4 @@ public class GuiHelper {
 			GL11.glPopMatrix();
 		} else fontrenderer.drawString(string, x, y, color, shadow);
 	}
-
 }

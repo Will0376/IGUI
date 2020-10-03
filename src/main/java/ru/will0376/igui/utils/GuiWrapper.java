@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class GuiWrapper extends GuiScreen {
 	public ArrayList<IButton> buttons = new ArrayList<>();
 	boolean rightClick = false;
+	boolean enableKeyControl = true;
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -42,7 +43,7 @@ public class GuiWrapper extends GuiScreen {
 			try {
 				if (e.isSelected()) {
 					int i = buttons.indexOf(e);
-					switch (keyCode) {
+					if (enableKeyControl) switch (keyCode) {
 						case Keyboard.KEY_LEFT:
 							if (e.canMove(keyCode)) {
 								if (i - 1 >= 0) {
