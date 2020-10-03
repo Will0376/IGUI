@@ -14,7 +14,11 @@ import org.lwjgl.opengl.GL11;
 public class GuiHelper {
 
 	public static void bindTexture(String modId, String path) {
-		bindTexture(new ResourceLocation(modId + ":" + path));
+		bindTexture(modId + ":" + path);
+	}
+
+	public static void bindTexture(String all) {
+		bindTexture(new ResourceLocation(all));
 	}
 
 	public static void bindTexture(ResourceLocation location) {
