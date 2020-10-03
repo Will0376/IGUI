@@ -12,7 +12,6 @@ public class GuiWrapper extends GuiScreen {
 	public ArrayList<IButton> buttons = new ArrayList<>();
 	boolean rightClick = false;
 	boolean enableKeyControl = true;
-	public static GuiHelper helper;
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
