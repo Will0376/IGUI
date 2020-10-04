@@ -10,6 +10,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import ru.will0376.igui.utils.GuiHelper;
 import ru.will0376.igui.utils.Mouses;
 
 public class MButton extends Gui implements IButton {
@@ -84,6 +85,8 @@ public class MButton extends Gui implements IButton {
 				int i = this.getHoverState(mouseOver);
 				this.drawTexturedModalRect(this.x, this.y, 0, 46 + i * 20, this.width / 2, this.height);
 				this.drawTexturedModalRect(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + i * 20, this.width / 2, this.height);
+			} else {
+				GuiHelper.cleanRender(x, y, width, height, (int) zLevel);
 			}
 			this.drawCenteredString(mc.fontRenderer, this.buttonText, this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
 		}
