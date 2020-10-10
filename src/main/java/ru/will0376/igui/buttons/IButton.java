@@ -13,6 +13,8 @@ public interface IButton {
 
 	void draw(Minecraft mc, int mouseX, int mouseY, float partialTicks);
 
+	void drawText(Minecraft mc, int mouseX, int mouseY, float partialTicks);
+
 	void mouseAction(int mouseX, int mouseY);
 
 	boolean mouseInArea(Minecraft mc, int mouseX, int mouseY);

@@ -112,6 +112,11 @@ public class MCheckBox extends Gui implements IButton {
 	}
 
 	@Override
+	public void drawText(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+		//NP;
+	}
+
+	@Override
 	public void mouseAction(int mouseX, int mouseY) {
 		if (mouseInArea(Minecraft.getMinecraft(), mouseX, mouseY) && Mouse.isButtonDown(0) && !mouseButton1) {
 			action(Mouses.LMB);

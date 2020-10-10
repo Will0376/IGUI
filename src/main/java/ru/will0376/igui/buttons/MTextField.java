@@ -75,6 +75,11 @@ public class MTextField extends Gui implements IButton {
 		drawTextBox();
 	}
 
+	@Override
+	public void drawText(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+		//TODO
+	}
+
 	public void drawTextBox() {
 		if (visible) {
 			drawRect(this.x - 1, this.y - 1, this.x + this.width + 1, this.y + this.height + 1, -6250336);

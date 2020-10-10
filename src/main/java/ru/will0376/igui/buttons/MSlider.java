@@ -2,7 +2,6 @@ package ru.will0376.igui.buttons;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -98,9 +97,13 @@ public class MSlider extends Gui implements IButton {
 				this.drawTexturedModalRect(this.x + (int) (this.sliderPosition * (float) (this.width - 8)), this.y, 0, 66, 4, this.height);
 				this.drawTexturedModalRect(this.x + (int) (this.sliderPosition * (float) (this.width - 8)) + 4, this.y, 196, 66, 4, this.height);
 			}
+			drawText(mc, mouseX, mouseY, partialTicks);
 		}
-		FontRenderer fontrenderer = mc.fontRenderer;
-		this.drawCenteredString(fontrenderer, this.name, this.x + this.width / 2, this.y + (this.height - 8) / 2, 14737632);
+	}
+
+	@Override
+	public void drawText(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+		this.drawCenteredString(mc.fontRenderer, this.name, this.x + this.width / 2, this.y + (this.height - 8) / 2, 14737632);
 	}
 
 	@Override

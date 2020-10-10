@@ -71,7 +71,7 @@ public class MButton extends Gui implements IButton {
 	@Override
 	public void draw(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
-			int j = this.enabled ? 14737632 : 10526880;
+
 			boolean mouseOver = mouseInArea(mc, mouseX, mouseY) || isSelected;
 
 			if (mouseOver && secondTexture != null) mc.getTextureManager().bindTexture(secondTexture);
@@ -88,8 +88,14 @@ public class MButton extends Gui implements IButton {
 			} else {
 				GuiHelper.cleanRender(x, y, width, height, (int) zLevel);
 			}
-			this.drawCenteredString(mc.fontRenderer, this.buttonText, this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
+			drawText(mc, mouseX, mouseY, partialTicks);
 		}
+	}
+
+	@Override
+	public void drawText(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+		int j = this.enabled ? 14737632 : 10526880;
+		this.drawCenteredString(mc.fontRenderer, this.buttonText, this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
 	}
 
 	protected int getHoverState(boolean mouseOver) {
