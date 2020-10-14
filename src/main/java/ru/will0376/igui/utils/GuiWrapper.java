@@ -12,10 +12,11 @@ public class GuiWrapper extends GuiScreen {
 	public ArrayList<IButton> buttons = new ArrayList<>();
 	boolean rightClick = false;
 	boolean enableKeyControl = true;
+	boolean updateScreen = false;
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		buttons.forEach(e -> {
+		if (!updateScreen) buttons.forEach(e -> {
 			e.draw(mc, mouseX, mouseY, partialTicks);
 			e.mouseAction(mouseX, mouseY);
 			if (e.getStaticId() == MTextField.TextField) {
@@ -33,6 +34,7 @@ public class GuiWrapper extends GuiScreen {
 
 	@Override
 	public void initGui() {
+		updateScreen = false;
 		super.initGui();
 		buttons.clear();
 	}
@@ -83,5 +85,10 @@ public class GuiWrapper extends GuiScreen {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void updateScreen() {
+		updateScreen = true;
+		mc.displayGuiScreen(this);
 	}
 }
