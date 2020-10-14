@@ -34,9 +34,10 @@ public class GuiWrapper extends GuiScreen {
 
 	@Override
 	public void initGui() {
-		updateScreen = false;
 		super.initGui();
 		buttons.clear();
+		updateScreen = false;
+
 	}
 
 	@Override
