@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class GuiWrapper extends GuiScreen {
 	public ArrayList<IButton> buttons = new ArrayList<>();
 	boolean rightClick = false;
-	boolean enableKeyControl = true;
-	boolean updateScreen = false;
+	public boolean enableKeyControl = true;
+	public boolean updateScreen = false;
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -88,7 +88,7 @@ public class GuiWrapper extends GuiScreen {
 		}
 	}
 
-	public void updateScreen() {
+	public void updateThisScreen() {
 		updateScreen = true;
 		mc.displayGuiScreen(this);
 	}
