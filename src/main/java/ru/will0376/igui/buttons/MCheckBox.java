@@ -32,8 +32,8 @@ public class MCheckBox extends Gui implements IButton {
 	private boolean isChecked;
 	private String buttonString;
 	private Mouses click;
-	private boolean mouseButton1 = false;
-	private boolean mouseButton2 = false;
+	public boolean mouseButton1 = false;
+	public boolean mouseButton2 = false;
 	private Runnable action = () -> {
 	};
 	private boolean isSelected = false;

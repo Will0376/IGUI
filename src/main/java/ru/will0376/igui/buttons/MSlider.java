@@ -27,7 +27,7 @@ public class MSlider extends Gui implements IButton {
 	Minecraft minecraft = Minecraft.getMinecraft();
 	private final ResourceLocation bg;
 	private final ResourceLocation button;
-	private boolean mouseButton2 = false;
+	public boolean mouseButton2 = false;
 	private Runnable action = () -> {
 	};
 	private Mouses click;

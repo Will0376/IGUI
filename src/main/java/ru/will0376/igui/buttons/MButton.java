@@ -29,8 +29,8 @@ public class MButton extends Gui implements IButton {
 	private Runnable action = () -> {
 	};
 	private Mouses click;
-	private boolean mouseButton1 = false;
-	private boolean mouseButton2 = false;
+	public boolean mouseButton1 = false;
+	public boolean mouseButton2 = false;
 	private boolean isSelected = false;
 
 	public MButton(int x, int y, int width, int height, String buttonText, ResourceLocation firstTexture, ResourceLocation secondTexture) {
