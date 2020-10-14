@@ -14,7 +14,7 @@ buildscript {
 apply plugin: "net.minecraftforge.gradle.forge"
 
 group = 'ru.will0376'
-version = '0.0.11A'
+version = '0.0.12A'
 archivesBaseName = 'IGui'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 minecraft {
