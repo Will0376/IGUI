@@ -105,7 +105,7 @@ public class MCheckBox extends Gui implements IButton {
 				GlStateManager.enableBlend();
 				GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-				GuiHelper.cleanRender(x, y, width, height, 1);
+				GuiHelper.cleanRender(x, y, width, height, (int) zLevel);
 				//this.drawTexturedModalRect(this.x, this.y, 0, 46, this.width / 2, this.height);
 			}
 		}
