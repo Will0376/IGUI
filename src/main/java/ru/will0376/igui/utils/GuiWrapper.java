@@ -1,6 +1,8 @@
 package ru.will0376.igui.utils;
 
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import ru.will0376.igui.buttons.IButton;
 import ru.will0376.igui.buttons.MTextField;
@@ -8,6 +10,7 @@ import ru.will0376.igui.buttons.MTextField;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@SideOnly(Side.CLIENT)
 public class GuiWrapper extends GuiScreen {
 	public ArrayList<IButton> buttons = new ArrayList<>();
 	boolean rightClick = false;

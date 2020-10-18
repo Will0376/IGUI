@@ -8,11 +8,14 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import ru.will0376.igui.utils.GuiHelper;
 import ru.will0376.igui.utils.Mouses;
 
+@SideOnly(Side.CLIENT)
 public class MCheckBox extends Gui implements IButton {
 	public static int CHECKBOX = 1;
 	protected static final ResourceLocation BUTTON_TEXTURES = new ResourceLocation("textures/gui/widgets.png");

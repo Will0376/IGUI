@@ -1,5 +1,9 @@
 package ru.will0376.igui.buttons;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
 public class GuiResponse {
 	boolean bool = false;
 

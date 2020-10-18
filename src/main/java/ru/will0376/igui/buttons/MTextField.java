@@ -11,6 +11,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import ru.will0376.igui.utils.Mouses;
@@ -20,6 +22,7 @@ import java.util.function.Predicate;
  * @deprecated Не готов.
  */
 @Deprecated
+@SideOnly(Side.CLIENT)
 public class MTextField extends Gui implements IButton {
 	public static int TextField = 3;
 	private final Predicate<String> validator = s -> true;

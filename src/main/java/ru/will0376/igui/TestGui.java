@@ -1,11 +1,13 @@
 package ru.will0376.igui;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.will0376.igui.buttons.*;
 import ru.will0376.igui.utils.GuiWrapper;
 
 import java.text.DecimalFormat;
 
-
+@SideOnly(Side.CLIENT)
 public class TestGui extends GuiWrapper {
 	@Override
 	public void initGui() {

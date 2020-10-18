@@ -11,7 +11,7 @@ public class IGui {
 
 	public static final String MOD_ID = "igui";
 	public static final String MOD_NAME = "IGui";
-	public static final String VERSION = "0.0.12A";
+	public static final String VERSION = "0.0.13A";
 
 	@Mod.Instance(MOD_ID)
 	public static IGui INSTANCE;
@@ -32,6 +32,6 @@ public class IGui {
 
 	@Mod.EventHandler
 	public void serverStart(FMLServerStartingEvent event) {
-		event.registerServerCommand(new CommandTest());
+		//event.registerServerCommand(new CommandTest());
 	}
 }
