@@ -35,11 +35,11 @@ public class MCheckBox extends Gui implements IButton {
 	private boolean isChecked;
 	private String buttonString;
 	private Mouses click;
-	public boolean mouseButton1 = false;
-	public boolean mouseButton2 = false;
+	public boolean mouseButton1 = true;
+	public boolean mouseButton2 = true;
 	private Runnable action = () -> {
 	};
-	private boolean isSelected = false;
+	private boolean isSelected = false, isSelectedDraw = false;
 
 	public MCheckBox(int x, int y, int width, int height, boolean isChecked, ResourceLocation firstTexture, ResourceLocation secondTexture, String name) {
 		this.isChecked = isChecked;
@@ -95,10 +95,10 @@ public class MCheckBox extends Gui implements IButton {
 			if (firstTexture == null && secondTexture == null) {
 				GuiUtils.drawContinuousTexturedBox(BUTTON_TEXTURES, this.x, this.y, 0, 46, this.width, this.height, 200, 20, 2, 3, 2, 2, this.zLevel);
 				if (this.isChecked) {
-					GuiHelper.drawScalledString(mc.fontRenderer, this.x + 5 + offsetTextX, this.y - (height / 2) + 5 + offsetTextY, scaledTextX, scaledTextY, 1, buttonString, -1);
+					GuiHelper.drawScalledString(mc.fontRenderer, this.x + 5 + offsetTextX, this.y - (height / 2) + 5 + offsetTextY, scaledTextX, scaledTextY, zLevel + 1, buttonString, -1);
 				}
-				if (this.isSelected)
-					GuiHelper.drawScalledString(mc.fontRenderer, this.x + 22 + offsetTextX, this.y - (height / 2) + 4 + offsetTextY, scaledTextX, scaledTextY, 1, "<", -1);
+				if (this.isSelected && isSelectedDraw)
+					GuiHelper.drawScalledString(mc.fontRenderer, this.x + 22 + offsetTextX, this.y - (height / 2) + 4 + offsetTextY, scaledTextX, scaledTextY, zLevel + 1, "<", -1);
 
 			} else {
 				if (!isChecked) Minecraft.getMinecraft().getTextureManager().bindTexture(firstTexture);
@@ -109,7 +109,6 @@ public class MCheckBox extends Gui implements IButton {
 				GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 				GuiHelper.cleanRender(x, y, width, height, (int) zLevel);
-				//this.drawTexturedModalRect(this.x, this.y, 0, 46, this.width / 2, this.height);
 			}
 		}
 	}
@@ -233,5 +232,15 @@ public class MCheckBox extends Gui implements IButton {
 	public MCheckBox setScaledTextY(float scaledTextY) {
 		this.scaledTextY = scaledTextY;
 		return this;
+	}
+
+	@Override
+	public IButton setZLevel(int z) {
+		zLevel = z;
+		return this;
+	}
+
+	public void setSelectedDraw(boolean selectedDraw) {
+		isSelectedDraw = selectedDraw;
 	}
 }

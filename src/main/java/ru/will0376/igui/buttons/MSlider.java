@@ -30,7 +30,7 @@ public class MSlider extends Gui implements IButton {
 	Minecraft minecraft = Minecraft.getMinecraft();
 	private final ResourceLocation bg;
 	private final ResourceLocation button;
-	public boolean mouseButton2 = false;
+	public boolean mouseButton2 = true;
 	private Runnable action = () -> {
 	};
 	private Mouses click;
@@ -204,5 +204,11 @@ public class MSlider extends Gui implements IButton {
 	public void setDefault() {
 		sliderPosition = defaultValue;
 		name = defName;
+	}
+
+	@Override
+	public IButton setZLevel(int z) {
+		zLevel = z;
+		return this;
 	}
 }

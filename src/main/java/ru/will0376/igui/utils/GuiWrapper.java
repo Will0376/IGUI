@@ -8,24 +8,24 @@ import ru.will0376.igui.buttons.IButton;
 import ru.will0376.igui.buttons.MTextField;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @SideOnly(Side.CLIENT)
 public class GuiWrapper extends GuiScreen {
-	public ArrayList<IButton> buttons = new ArrayList<>();
+	public CopyOnWriteArrayList<IButton> buttons = new CopyOnWriteArrayList<>();
 	boolean rightClick = false;
 	public boolean enableKeyControl = true;
-	public boolean updateScreen = false;
+
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		if (!updateScreen) buttons.forEach(e -> {
-			e.draw(mc, mouseX, mouseY, partialTicks);
-			e.mouseAction(mouseX, mouseY);
-			if (e.getStaticId() == MTextField.TextField) {
-				if (((MTextField) e).getResponse().getAndToggle()) {
+		buttons.forEach(button -> {
+			button.draw(mc, mouseX, mouseY, partialTicks);
+			button.mouseAction(mouseX, mouseY);
+			if (button.getStaticId() == MTextField.TextField) {
+				if (((MTextField) button).getResponse().getAndToggle()) {
 					deSelectAllButtons();
-					e.setSelected(true);
+					button.setSelected(true);
 				}
 			}
 		});
@@ -38,9 +38,11 @@ public class GuiWrapper extends GuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
-		buttons.clear();
-		updateScreen = false;
+		clearList();
+	}
 
+	public void clearList() {
+		buttons.clear();
 	}
 
 	@Override
@@ -92,7 +94,6 @@ public class GuiWrapper extends GuiScreen {
 	}
 
 	public void updateThisScreen() {
-		updateScreen = true;
 		mc.displayGuiScreen(this);
 	}
 }

@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiHelper {
@@ -102,11 +101,11 @@ public class GuiHelper {
 	public static void drawScalledString(FontRenderer fontrenderer, int x, int y, float scalledX, float scalledY, float zLevel, String string, int color, boolean shadow) {
 		if (color == -1) color = 16777215;
 		if (scalledX != 1.0f || scalledY != 1.0f || zLevel != 0) {
-			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y, zLevel);
-			GL11.glScalef(scalledX, scalledY, zLevel);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(x, y, zLevel);
+			GlStateManager.scale(scalledX, scalledY, zLevel);
 			fontrenderer.drawString(string, 0, 0, color, shadow);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		} else fontrenderer.drawString(string, x, y, color, shadow);
 	}
 }

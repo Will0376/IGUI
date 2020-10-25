@@ -40,4 +40,6 @@ public interface IButton {
 	void keyInput(char typedChar, int keyCode);
 
 	boolean canMove(int keyCode);
+
+	IButton setZLevel(int z);
 }

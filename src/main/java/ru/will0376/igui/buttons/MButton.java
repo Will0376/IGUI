@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 import ru.will0376.igui.utils.GuiHelper;
 import ru.will0376.igui.utils.Mouses;
 
@@ -32,8 +33,8 @@ public class MButton extends Gui implements IButton {
 	private Runnable action = () -> {
 	};
 	private Mouses click;
-	public boolean mouseButton1 = false;
-	public boolean mouseButton2 = false;
+	public boolean mouseButton1 = true;
+	public boolean mouseButton2 = true;
 	private boolean isSelected = false;
 
 	public MButton(int x, int y, int width, int height, String buttonText, ResourceLocation firstTexture, ResourceLocation secondTexture) {
@@ -86,8 +87,11 @@ public class MButton extends Gui implements IButton {
 
 			if (secondTexture == null) {
 				int i = this.getHoverState(mouseOver);
+				GlStateManager.pushMatrix();
+				GL11.glScalef(1, 1, zLevel);
 				this.drawTexturedModalRect(this.x, this.y, 0, 46 + i * 20, this.width / 2, this.height);
 				this.drawTexturedModalRect(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + i * 20, this.width / 2, this.height);
+				GlStateManager.popMatrix();
 			} else {
 				GuiHelper.cleanRender(x, y, width, height, (int) zLevel);
 			}
@@ -98,7 +102,7 @@ public class MButton extends Gui implements IButton {
 	@Override
 	public void drawText(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		int j = this.enabled ? 14737632 : 10526880;
-		this.drawCenteredString(mc.fontRenderer, this.buttonText, this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
+		GuiHelper.drawScalledCenteredString(mc.fontRenderer, this.x + this.width / 2, this.y + (this.height - 8) / 2, 1, 1, zLevel + 1, buttonText, j);
 	}
 
 	protected int getHoverState(boolean mouseOver) {
@@ -189,7 +193,9 @@ public class MButton extends Gui implements IButton {
 		return true;
 	}
 
-	public MButton get() {
+	@Override
+	public IButton setZLevel(int z) {
+		zLevel = z;
 		return this;
 	}
 }

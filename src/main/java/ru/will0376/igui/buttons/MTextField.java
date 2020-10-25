@@ -365,4 +365,10 @@ public class MTextField extends Gui implements IButton {
 	public boolean canMove(int keyCode) {
 		return (cursor == 0 && keyCode == Keyboard.KEY_LEFT) || (cursor == inputText.length() && keyCode == Keyboard.KEY_RIGHT);
 	}
+
+	@Override
+	public IButton setZLevel(int z) {
+		zLevel = z;
+		return this;
+	}
 }
