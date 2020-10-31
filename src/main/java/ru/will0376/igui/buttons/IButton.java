@@ -11,6 +11,8 @@ public interface IButton {
 
 	IButton setEnabled(boolean bool);
 
+	IButton setVisible(boolean bool);
+
 	void draw(Minecraft mc, int mouseX, int mouseY, float partialTicks);
 
 	void drawText(Minecraft mc, int mouseX, int mouseY, float partialTicks);
@@ -21,7 +23,7 @@ public interface IButton {
 
 	IButton action(Mouses click);
 
-	void setAction(Runnable action);
+	IButton setAction(Runnable action);
 
 	void click(SoundHandler soundHandlerIn);
 

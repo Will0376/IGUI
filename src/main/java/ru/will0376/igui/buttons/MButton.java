@@ -73,6 +73,12 @@ public class MButton extends Gui implements IButton {
 	}
 
 	@Override
+	public IButton setVisible(boolean visible) {
+		this.visible = visible;
+		return this;
+	}
+
+	@Override
 	public void draw(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
 
@@ -149,8 +155,9 @@ public class MButton extends Gui implements IButton {
 	}
 
 	@Override
-	public void setAction(Runnable action) {
+	public IButton setAction(Runnable action) {
 		this.action = action;
+		return this;
 	}
 
 	@Override

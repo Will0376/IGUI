@@ -93,6 +93,14 @@ public class GuiWrapper extends GuiScreen {
 		}
 	}
 
+	public void closeGui() {
+		mc.displayGuiScreen(null);
+	}
+
+	public void openGui(GuiScreen screen) {
+		mc.displayGuiScreen(screen);
+	}
+
 	public void updateThisScreen() {
 		mc.displayGuiScreen(this);
 	}

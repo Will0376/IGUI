@@ -258,8 +258,14 @@ public class MTextField extends Gui implements IButton {
 	}
 
 	@Override
-	public void setAction(Runnable action) {
+	public IButton setAction(Runnable action) {
+		return this;
+	}
 
+	@Override
+	public IButton setVisible(boolean visible) {
+		this.visible = visible;
+		return this;
 	}
 
 	@Override
