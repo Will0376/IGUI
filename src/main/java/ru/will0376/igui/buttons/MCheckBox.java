@@ -1,11 +1,9 @@
 package ru.will0376.igui.buttons;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.relauncher.Side;
@@ -31,7 +29,7 @@ public class MCheckBox extends Gui implements IButton {
 	public float scaledTextY;
 	public boolean enabled;
 	public boolean visible;
-	public Minecraft mc = Minecraft.getMinecraft();
+//	public Minecraft mc = Minecraft.getMinecraft();
 	private boolean isChecked;
 	private String buttonString;
 	private Mouses click;
@@ -138,7 +136,7 @@ public class MCheckBox extends Gui implements IButton {
 
 	@Override
 	public IButton action(Mouses click) {
-		click(mc.getSoundHandler());
+		//click(mc.getSoundHandler());
 		this.click = click;
 		action.run();
 		return this;
@@ -146,7 +144,7 @@ public class MCheckBox extends Gui implements IButton {
 
 	@Override
 	public void click(SoundHandler soundHandlerIn) {
-		soundHandlerIn.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+		//soundHandlerIn.playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
 	}
 
 	@Override

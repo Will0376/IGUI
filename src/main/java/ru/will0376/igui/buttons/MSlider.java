@@ -27,7 +27,7 @@ public class MSlider extends Gui implements IButton {
 	public float min, max;
 	public String name;
 	public String defName;
-	Minecraft minecraft = Minecraft.getMinecraft();
+//	Minecraft minecraft = Minecraft.getMinecraft();
 	private final ResourceLocation bg;
 	private final ResourceLocation button;
 	public boolean mouseButton2 = true;
@@ -111,7 +111,7 @@ public class MSlider extends Gui implements IButton {
 
 	@Override
 	public void mouseAction(int mouseX, int mouseY) {
-		boolean mouse = mouseInArea(minecraft, mouseX, mouseY);
+		boolean mouse = mouseInArea(null, mouseX, mouseY);
 		if (mouse && Mouse.isButtonDown(0) && !mouseButton1) {
 			this.sliderPosition = (float) (mouseX - (this.x + 4)) / (float) (this.width - 8);
 			if (this.sliderPosition < 0.0F) this.sliderPosition = 0.0F;

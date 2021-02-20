@@ -29,7 +29,7 @@ public class MButton extends Gui implements IButton {
 	public boolean enabled;
 	public boolean visible;
 	public String buttonText;
-	public Minecraft mc = Minecraft.getMinecraft();
+//	public Minecraft mc = Minecraft.getMinecraft();
 	private Runnable action = () -> {
 	};
 	private Mouses click;
@@ -138,7 +138,7 @@ public class MButton extends Gui implements IButton {
 
 	@Override
 	public IButton action(Mouses click) {
-		click(mc.getSoundHandler());
+		//click(mc.getSoundHandler());
 		this.click = click;
 		action.run();
 		return this;
