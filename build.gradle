@@ -14,13 +14,22 @@ buildscript {
 apply plugin: "net.minecraftforge.gradle.forge"
 
 group = 'ru.will0376'
-version = '0.0.16A'
+version = String.format('%s.%s',_version, getBuild())
 archivesBaseName = 'IGui'
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile).each {
+    task ->
+        task.options.encoding = 'UTF-8'
+        task.sourceCompatibility = task.targetCompatibility = '1.8'
+}
+
 minecraft {
     version = project.forgeVersion
     runDir = "run"
     mappings = project.mcpVersion
+    replace "@version@", project.version
+    replaceIn "IGUI.java"
+
 }
 
 repositories {
@@ -28,6 +37,8 @@ repositories {
 }
 
 dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
 }
 
 processResources {
@@ -40,4 +51,14 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude "mcmod.info"
     }
+}
+
+ext {
+    println('+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+')
+    println('Mod version:' + version)
+    println('+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+')
+}
+
+def getBuild() {
+    return Integer.valueOf('git rev-list --count HEAD'.execute(null, projectDir).text.trim())
 }
