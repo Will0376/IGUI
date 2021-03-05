@@ -15,8 +15,11 @@ public class Switches {
 	private boolean thxPhoton = true;
 
 	public static Switches getByName(String modid) {
-		if (!switchesMap.containsKey(modid)) return switchesMap.put(modid, new Switches());
-		else return switchesMap.get(modid);
+		if (!switchesMap.containsKey(modid)) {
+			Switches value = new Switches();
+			switchesMap.put(modid, value);
+			return value;
+		} else return switchesMap.get(modid);
 	}
 
 	public static boolean findBoolean(String name, Boolean value) {
