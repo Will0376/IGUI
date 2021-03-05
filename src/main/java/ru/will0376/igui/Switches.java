@@ -23,20 +23,19 @@ public class Switches {
 	}
 
 	public static boolean findBoolean(String name, Boolean value) {
-		return findWithCast(name, value);
+		return findWithCast(name, value) == value;
 	}
 
 	public static <T> T findWithCast(String name, T value) {
-		return (T) findWithCast(value.getClass(), name, value);
+		return (T) findWithCast(value.getClass(), name);
 	}
 
-	public static <T, V> T findWithCast(Class<T> cast, String name, V value) {
+	public static <T> T findWithCast(Class<T> cast, String name) {
 		try {
 			for (Map.Entry<String, Switches> entry : switchesMap.entrySet()) {
 				Switches switches = entry.getValue();
 				for (Field declaredField : switches.getClass().getDeclaredFields()) {
-					if (declaredField.getName().equals(name) && declaredField.get(switches).equals(value))
-						return (T) declaredField.get(switches);
+					if (declaredField.getName().equals(name)) return (T) declaredField.get(switches);
 				}
 			}
 		} catch (Exception exception) {
