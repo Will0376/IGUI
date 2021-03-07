@@ -8,7 +8,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.registries.IForgeRegistry;
-import ru.will0376.igui.Switches;
 import ru.will0376.igui.obj.armor.model.ArmorBinding;
 
 import java.util.HashMap;
@@ -33,8 +32,6 @@ public enum ArmorRegistry {
 
 
 	ArmorRegistry() {
-		if (Switches.findBoolean("thxPhoton", true))
-			org.apache.logging.log4j.LogManager.getLogger(ArmorRegistry.class).info("Thanks to photon for this code");
 	}
 
 	public ItemArmor.ArmorMaterial generateArmorMaterial(String modid, String name, float durabilityFactor, int baseDurability, float damageFactor, int[] baseDamageability, int enchantibility, float toughness) {

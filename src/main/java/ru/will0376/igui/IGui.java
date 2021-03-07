@@ -19,7 +19,6 @@ public class IGui {
 
 	@Mod.EventHandler
 	public void preinit(FMLPreInitializationEvent event) {
-		switches.setThxPhoton(false);
 	}
 
 	@Mod.EventHandler

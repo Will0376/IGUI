@@ -12,7 +12,6 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class Switches {
 	public static Map<String, Switches> switchesMap = new HashMap<>();
-	private boolean thxPhoton = true;
 
 	public static Switches getByName(String modid) {
 		if (!switchesMap.containsKey(modid)) {
