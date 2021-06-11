@@ -28,7 +28,7 @@ minecraft {
     runDir = "run"
     mappings = project.mcpVersion
     replace "@version@", project.version
-    replaceIn "IGUI.java"
+    replaceIn "IGui.java"
 
 }
 

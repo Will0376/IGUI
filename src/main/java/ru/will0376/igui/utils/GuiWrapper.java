@@ -10,7 +10,11 @@ import ru.will0376.igui.buttons.MTextField;
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * @deprecated Use NewGuiWrapper.class
+ */
 @SideOnly(Side.CLIENT)
+@Deprecated
 public class GuiWrapper extends GuiScreen {
 	public CopyOnWriteArrayList<IButton> buttons = new CopyOnWriteArrayList<>();
 	boolean rightClick = false;
