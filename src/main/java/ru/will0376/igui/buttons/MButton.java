@@ -19,7 +19,7 @@ import ru.will0376.igui.utils.Mouses;
 @SideOnly(Side.CLIENT)
 public class MButton extends Gui implements IButton {
 	public static int BUTTON = 0;
-	protected static final ResourceLocation BUTTON_DEFAULT_TEXTURES = new ResourceLocation("textures/gui/widgets.png");
+	public static final ResourceLocation BUTTON_DEFAULT_TEXTURES = new ResourceLocation("textures/gui/widgets.png");
 	public ResourceLocation firstTexture;
 	public ResourceLocation secondTexture;
 	public int width;
@@ -29,7 +29,6 @@ public class MButton extends Gui implements IButton {
 	public boolean enabled;
 	public boolean visible;
 	public String buttonText;
-//	public Minecraft mc = Minecraft.getMinecraft();
 	private Runnable action = () -> {
 	};
 	private Mouses click;
@@ -81,26 +80,28 @@ public class MButton extends Gui implements IButton {
 	@Override
 	public void draw(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
-
 			boolean mouseOver = mouseInArea(mc, mouseX, mouseY) || isSelected;
 
 			if (mouseOver && secondTexture != null) mc.getTextureManager().bindTexture(secondTexture);
 			else mc.getTextureManager().bindTexture(firstTexture);
+			GlStateManager.pushMatrix();
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			GlStateManager.enableBlend();
 			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
+
+			applyDrawMatrixModify();
 			if (secondTexture == null) {
 				int i = this.getHoverState(mouseOver);
-				GlStateManager.pushMatrix();
-				GL11.glScalef(1, 1, zLevel);
+				//GL11.glScalef(1, 1, zLevel);
 				this.drawTexturedModalRect(this.x, this.y, 0, 46 + i * 20, this.width / 2, this.height);
 				this.drawTexturedModalRect(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + i * 20, this.width / 2, this.height);
-				GlStateManager.popMatrix();
+
 			} else {
 				GuiHelper.cleanRender(x, y, width, height, (int) zLevel);
 			}
+			GlStateManager.popMatrix();
 			drawText(mc, mouseX, mouseY, partialTicks);
 		}
 	}
@@ -108,7 +109,12 @@ public class MButton extends Gui implements IButton {
 	@Override
 	public void drawText(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		int j = this.enabled ? 14737632 : 10526880;
-		GuiHelper.drawScalledCenteredString(mc.fontRenderer, this.x + this.width / 2, this.y + (this.height - 8) / 2, 1, 1, zLevel + 1, buttonText, j);
+		GuiHelper.Text.drawScalledCenteredString(mc.fontRenderer, this.x + this.width / 2, this.y + (this.height - 8) / 2, 1, 1, zLevel + 1, buttonText, j);
+	}
+
+	@Override
+	public void applyDrawMatrixModify() {
+		if (secondTexture == null) GL11.glScalef(1, 1, zLevel);
 	}
 
 	protected int getHoverState(boolean mouseOver) {

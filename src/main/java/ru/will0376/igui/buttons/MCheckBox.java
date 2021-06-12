@@ -16,7 +16,7 @@ import ru.will0376.igui.utils.Mouses;
 @SideOnly(Side.CLIENT)
 public class MCheckBox extends Gui implements IButton {
 	public static int CHECKBOX = 1;
-	protected static final ResourceLocation BUTTON_TEXTURES = new ResourceLocation("textures/gui/widgets.png");
+	public static final ResourceLocation BUTTON_TEXTURES = new ResourceLocation("textures/gui/widgets.png");
 	public ResourceLocation firstTexture;
 	public ResourceLocation secondTexture;
 	public int width;
@@ -29,7 +29,6 @@ public class MCheckBox extends Gui implements IButton {
 	public float scaledTextY;
 	public boolean enabled;
 	public boolean visible;
-//	public Minecraft mc = Minecraft.getMinecraft();
 	private boolean isChecked;
 	private String buttonString;
 	private Mouses click;
@@ -101,12 +100,15 @@ public class MCheckBox extends Gui implements IButton {
 			} else {
 				if (!isChecked) Minecraft.getMinecraft().getTextureManager().bindTexture(firstTexture);
 				else Minecraft.getMinecraft().getTextureManager().bindTexture(secondTexture);
-
+				GlStateManager.pushMatrix();
+				applyDrawMatrixModify();
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				GlStateManager.enableBlend();
 				GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 				GuiHelper.cleanRender(x, y, width, height, (int) zLevel);
+
+				GlStateManager.popMatrix();
 			}
 		}
 	}

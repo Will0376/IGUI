@@ -44,4 +44,11 @@ public interface IButton {
 	boolean canMove(int keyCode);
 
 	IButton setZLevel(int z);
+
+	/**
+	 * Используется для сторонних настроек матрицы в момент рендера.
+	 * По дефолту матрица уже взята.
+	 */
+	default void applyDrawMatrixModify() {
+	}
 }

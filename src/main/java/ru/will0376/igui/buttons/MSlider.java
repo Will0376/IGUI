@@ -16,7 +16,7 @@ import ru.will0376.igui.utils.Mouses;
 @SideOnly(Side.CLIENT)
 public class MSlider extends Gui implements IButton {
 	public static int SLIDER = 2;
-	protected static final ResourceLocation BUTTON_TEXTURES = new ResourceLocation("textures/gui/widgets.png"); //TODO: переделать на свои текстуры
+	public static final ResourceLocation BUTTON_TEXTURES = new ResourceLocation("textures/gui/widgets.png"); //TODO: переделать на свои текстуры
 	private final boolean mouseButton1 = false;
 	public boolean enabled = true;
 	public int x;
@@ -27,7 +27,6 @@ public class MSlider extends Gui implements IButton {
 	public float min, max;
 	public String name;
 	public String defName;
-//	Minecraft minecraft = Minecraft.getMinecraft();
 	private final ResourceLocation bg;
 	private final ResourceLocation button;
 	public boolean mouseButton2 = true;
@@ -81,7 +80,8 @@ public class MSlider extends Gui implements IButton {
 	public void draw(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (bg == null) mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
 		else mc.getTextureManager().bindTexture(bg);
-
+		GlStateManager.pushMatrix();
+		applyDrawMatrixModify();
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.enableBlend();
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
@@ -102,6 +102,7 @@ public class MSlider extends Gui implements IButton {
 			}
 			drawText(mc, mouseX, mouseY, partialTicks);
 		}
+		GlStateManager.popMatrix();
 	}
 
 	@Override

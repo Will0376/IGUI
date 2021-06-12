@@ -33,6 +33,6 @@ public class IGui {
 
 	@Mod.EventHandler
 	public void serverStart(FMLServerStartingEvent event) {
-		event.registerServerCommand(new CommandTest());
+		//event.registerServerCommand(new CommandTest());
 	}
 }
