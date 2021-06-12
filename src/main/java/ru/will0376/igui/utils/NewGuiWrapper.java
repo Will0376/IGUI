@@ -1,7 +1,10 @@
 package ru.will0376.igui.utils;
 
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public abstract class NewGuiWrapper extends GuiWrapper {
 	public ScaledResolution resolution;
 
